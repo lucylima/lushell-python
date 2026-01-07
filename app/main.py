@@ -4,15 +4,18 @@ import sys
 def main():
     while True:
         sys.stdout.write("$ ")
-        command = input()
+        user_input = input()
 
-        command = command.split()
+        user_input = user_input.split()
 
-        match command[0]:
+        command = user_input[0]
+        args = user_input[1:]
+
+        match command:
             case "cd":
                 pass
             case "echo":
-                result = " ".join(command[1:])
+                result = " ".join(args)
                 sys.stdout.write(f"{result}\n")
                 
             case "exit":
