@@ -5,11 +5,16 @@ def main():
     while True:
         sys.stdout.write("$ ")
         command = input()
-        match command:
+
+        command = command.split()
+
+        match command[0]:
             case "cd":
                 pass
             case "echo":
-                pass
+                result = " ".join(command[1:])
+                sys.stdout.write(f"{result}\n")
+                
             case "exit":
                 sys.exit(0)
             case _:
