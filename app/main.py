@@ -10,6 +10,8 @@ def main():
                 pass
             case "echo":
                 pass
+            case "exit":
+                sys.exit(0)
             case _:
                 sys.stdout.write(f'{command}: command not found\n')
 
