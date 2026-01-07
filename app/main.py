@@ -1,5 +1,7 @@
+from ast import arg
 import sys
-
+import os
+import pathlib
 
 def main():
     builtin_commands = ['cd', 'echo', 'type', 'exit']
@@ -26,6 +28,19 @@ def main():
             case "type":
                 if args[0] in builtin_commands:
                     sys.stdout.write(f"{args[0]} is a shell builtin\n")
+                    continue
+
+                env = os.getenv("PATH", "Path not found")
+                env = env.split(':')
+
+                for folder in env:
+                    arg_exec = os.path.join(folder, args[0])
+
+                    if os.access(arg_exec, os.X_OK):
+                        sys.stdout.write(f"{args[0]} is {arg_exec}\n")
+                        break
+                    else:
+                        continue
                 else:
                     sys.stdout.write(f"{args[0]} not found\n")
             
