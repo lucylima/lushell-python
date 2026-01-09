@@ -2,7 +2,7 @@ import sys
 import os
 import subprocess
 
-builtin_commands = ['cd', 'echo', 'type', 'exit']
+builtin_commands = ['cd', 'echo', 'type', 'exit', 'pwd']
 
 def main():
     while True:
