@@ -6,8 +6,8 @@ builtin_commands = ['cd', 'echo', 'type', 'exit']
 
 def main():
     while True:
-        username = f"{os.getlogin()}@{os.getenv('HOST', os.getlogin())}:"
-        sys.stdout.write(f"{username} $ ")
+        sys.stdout.write("$ ")
+
         user_input = input()
 
         user_input = user_input.split()
