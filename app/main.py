@@ -2,10 +2,12 @@ import sys
 import os
 import subprocess
 
+builtin_commands = ['cd', 'echo', 'type', 'exit']
+
 def main():
-    builtin_commands = ['cd', 'echo', 'type', 'exit']
     while True:
-        sys.stdout.write("$ ")
+        username = f"{os.getlogin()}@{os.getenv('HOST', os.getlogin())}:"
+        sys.stdout.write(f"{username} $ ")
         user_input = input()
 
         user_input = user_input.split()
@@ -43,13 +45,16 @@ def main():
                 else:
                     sys.stdout.write(f"{args[0]} not found\n")
 
+            case "pwd":
+                current_working_directory = os.getcwd()
+                sys.stdout.write(f"{current_working_directory}\n")
+
             case _:
                 result = find_exec(command, args)
                 if result == 1:
                     sys.stdout.write(f'{command}: command not found\n')
                 elif result == 2:
                     sys.stdout.write("System path not found\n")
-
 
 def find_exec(command, args):
     env = os.getenv("PATH", "Path not found")
