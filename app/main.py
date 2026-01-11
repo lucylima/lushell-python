@@ -1,6 +1,8 @@
 import sys
 import os
 import subprocess
+from pathlib import Path
+import shlex
 
 builtin_commands = ['cd', 'echo', 'type', 'exit', 'pwd']
 
@@ -9,15 +11,22 @@ def main():
         sys.stdout.write("$ ")
 
         user_input = input()
-
         user_input = user_input.split()
+
+        if not user_input:
+            continue
 
         command = user_input[0]
         args = user_input[1:]
 
         match command:
             case "cd":
-                pass
+                cd_path = Path(args[0])
+
+                if cd_path.exists():
+                    os.chdir(str(cd_path))
+                else:
+                    sys.stdout.write(f"cd: {cd_path} No such file or directory\n")
                 
             case "echo":
                 result = " ".join(args)
@@ -46,7 +55,7 @@ def main():
                     sys.stdout.write(f"{args[0]} not found\n")
 
             case "pwd":
-                current_working_directory = os.getcwd()
+                current_working_directory = Path.cwd()
                 sys.stdout.write(f"{current_working_directory}\n")
 
             case _:
