@@ -26,7 +26,7 @@ def main():
                 if cd_path.exists():
                     os.chdir(str(cd_path))
                 else:
-                    sys.stdout.write(f"cd: {cd_path} No such file or directory\n")
+                    sys.stdout.write(f"cd: {cd_path}: No such file or directory\n")
                 
             case "echo":
                 result = " ".join(args)
