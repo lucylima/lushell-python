@@ -21,7 +21,7 @@ def main():
 
         match command:
             case "cd":
-                cd_path = Path(args[0])
+                cd_path = Path(args[0]).expanduser()
 
                 if cd_path.exists():
                     os.chdir(str(cd_path))
